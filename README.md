@@ -1,6 +1,8 @@
-# Thinkful Full Stack Template
+# Let's learn Spanish
 
-A template for developing and deploying full stack JavaScript apps.  Supports ES2015 on the client and server-side.
+With over 50 million Spanish-speaking natives in the United States, it is easy to say that Spanish has been one of the most popular language spoken today.  This is the main reason why, learning Spanish can improve your employment potential.  Just knowing a second language would increase your chances, but to know Spanish could set you apart from those that know a different second language.  In addition, travelling around the world could also be that much sweeter, knowing Spanish.
+
+In order to learn Spanish or any other language, we would need to have a good/efficient way of learning so we can actually retain what we are studying.  That's where Spaced repetition comes in handy.  With spaced repetition, if we know something, we don't need to practice it for some period of time, but if we don't know, then we need to practice it.  For example, if you know the material, it will be sent to the end of the list, but if you don't, it will be put in somewhere in the list, where it comes back sooner.  
 
 ## Getting started
 
@@ -13,10 +15,22 @@ A template for developing and deploying full stack JavaScript apps.  Supports ES
 * Create a new repo on GitHub: https://github.com/new
     * Make sure the "Initialize this repository with a README" option is left **un**checked
 * Update the remote to point to your GitHub repository: `git remote set-url origin https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME`
+* Make sure everyone in your group is working out of separate branches on github and push to their branch.  This becomes important when merging to the master.
+###Tech Stack
+* HTMLSCSS
+* React/Redux
+* MongoDB
+* Express
+* Node.js
+* Passport
+* Google OAuth
+
 
 ### Working on the project
+* Divide the tasks amongst the group and the individual should focus on that
 
 * Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
+* Run the MongoDB: ./mongod or sudo ./mongod
 * Run the development task: `npm run dev`
     * Starts a server running at http://localhost:8080
     * Automatically rebuilds when any of your files change
@@ -34,6 +48,43 @@ A template for developing and deploying full stack JavaScript apps.  Supports ES
     ├── client  Client tests
     └── server  Server tests
 ```
+
+##API Documentation
+###Need to authenticate, using Google's implementation of OAuth
+**/auth/google**
+
+**GET/auth/google**
+* This makes authorization requests.  It allows anyone with a Google account to easily register or login to your app.
+
+##User Endpoint
+**GET/user**
+
+Endpoint to user of the app/google account
+
+
+**DELETE/userid**
+
+Deletes the user by their userid
+
+**GET/logout**
+
+Logs out the user and redirects to the home
+
+###Start of the Questions
+**GET/questions**
+
+Using the Bearer strategy to protect the endpoint of the questions
+
+**POST/questions**
+
+Actually lets you create the questions that you are storing in the server
+
+**PUT/questions**
+
+
+
+
+
 
 ## Deployment
 
@@ -71,4 +122,7 @@ Requires the [Travis CLI client](https://github.com/travis-ci/travis.rb).
 ### Deploying using CD
 
 * Push your code to GitHub: `git push origin master`
+
+##Special Thanks to:
+* 
 
