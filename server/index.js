@@ -39,7 +39,7 @@ passport.use(new GoogleStrategy({
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: 'http://localhost:8080/auth/google/callback'
 },
-(accessToken, refreshToken, profile, cb) => {
+(accessToken, refreshToken, profile, callback) => {
     User.find({ googleId: profile.id }, (err, user) => {
             // once we authorize, populate the questions array for user
             if (!user.length) {
@@ -62,11 +62,11 @@ passport.use(new GoogleStrategy({
                         questions: questionsArray
                     }, (err, user) => {
                         // console.log(user);
-                        return cb(err, user);
+                        return callback(err, user);
                     });
                 });
             } else {
-                return cb(err, user[0]);
+                return callback(err, user[0]);
             }
         })
 }
@@ -78,31 +78,31 @@ passport.use(new BearerStrategy(
     (token, done) => {
         User.findOne({accessToken: token}, (err, user) => {
             if (err) {
+                console.log(err);
                 return done(null, false);
-            }
-            if (!user.length) {
-                return done(null, false);
-            }
-            
-            return done(null, user[0]);
+            }          
+            return done(null, user);
         });
     }
     ));
 //// END BEARER STRAT ////
 
 //// START AUTH REQUESTS ////
-var accessToken = null;
 app.get('/auth/google', passport.authenticate('google', {scope:['profile']}));
     
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/', session: false }),
   (req, res) => {
-    accessToken = req.user.accessToken;
     fs.readFile('./client/index.html', (err, html) => {
         if (err) {
             return res.status(400).json(err);
         }
-        res.redirect('/#/questions?access_token=' + accessToken );
+        html = html.toString().replace('<!--auth_token-->', 
+            `<script>
+                const TOKEN="${req.user.accessToken}";
+                history.replaceState(null, null, "/#/questions");
+             </script>`);
+        res.send(html);
     });
   }
 );
@@ -135,7 +135,7 @@ app.get('/logout', function(req, res) {
 //// END USERS ////
 
 //// START QUESTIONS ////
-app.get('/questions', (req, res) => {
+app.get('/questions', passport.authenticate('bearer', { session: false }), (req, res) => {
     // grab question from user's questions array...
     console.log("in questions");
     Question.find((err, q) => {

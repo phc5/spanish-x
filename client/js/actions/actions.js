@@ -29,17 +29,13 @@ const getParameterByName = (name, url) => {
 }
 
 const fetchQuestion = () => {
-	return (dispatch) => {
-		let access_token = getParameterByName('access_token');
+	return (dispatch) => {	
 		let url = "http://localhost:8080/questions";
-		let auth = 'Bearer ' + access_token;
-		const header = {
-			Authorization: auth
-		}
 		return fetch(url, {
-			header
+			headers: {
+				Authorization: `Bearer ${TOKEN}`
+			}
 		}).then((response) => {
-			console.log("ASDFASDFADSFA");
 			if (response.status < 200) {
 				let error = new Error(response.statusText);
 				error.response = response;
@@ -47,14 +43,16 @@ const fetchQuestion = () => {
 			}
 			return response.json();
 		}).then((questions) => {
-			console.log("!!!");
-			console.log(questions);
 			return dispatch(fetchQuestionsSuccess(questions));
 		}).catch((err) => {
 			console.log(err);
 			return dispatch(fetchQuestionsError(err));
 		})
 	};
+}
+
+const submitAnswer = () => {
+
 }
 
 

@@ -10,26 +10,25 @@ class Questions extends React.Component {
     componentDidMount() {
         this.props.dispatch(actions.fetchQuestion());
     }
-    
+
     render() {
-        if (!this.props.questions.question) {
+        if (!this.props.questions) {
             var spans = <span></span>
         } else {
-            var spans = this.props.questions.map((question, index) =>
-                <span key={index}>{question}</span>
+            var word = this.props.questions.map((question, index) =>
+                <span key={index}>{question.word} &nbsp;</span>
             );
         }
         return (
             <div>
                 <section className="button">
-                    <p>Firefly X</p>
+                    <p>Spanish X</p>
                     <a className="logout" href="/logout">
                         <span>Log Out</span>
-                        <span>To Front</span>
                     </a>
                 </section>
                 <section>
-                    <div>{spans}</div>
+                    <div>{word}</div>
                 </section>
             </div>
         )
