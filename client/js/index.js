@@ -1,3 +1,24 @@
-import 'babel-polyfill';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
+import store from './store';
+import {Router, Route, hashHistory} from 'react-router';
+import Home from './components/home';
+import Questions from './components/questions';
+
+
 
 console.log(`Client running in ${process.env.NODE_ENV} mode`);
+
+const routes = (
+	<Provider store={store}>
+		<Router history={hashHistory}>
+			<Route path="/" component={Home} />
+			<Route path="/questions" component={Questions} />
+		</Router>
+	</Provider>
+)
+
+document.addEventListener('DOMContentLoaded', () => {
+	ReactDOM.render(routes, document.getElementById('app'));
+});

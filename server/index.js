@@ -91,13 +91,21 @@ passport.use(new BearerStrategy(
 //// END BEARER STRAT ////
 
 //// START AUTH REQUESTS ////
+var accessToken = null;
 app.get('/auth/google', passport.authenticate('google', {scope:['profile']}));
-
-app.get('/auth/google/callback', passport.authenticate('google', {
-    successRedirect : '/questions',
-    failureRedirect : '/'
-}));
-
+    
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/', session: false }),
+  (req, res) => {
+    accessToken = req.user.accessToken;
+    fs.readFile('./client/index.html', (err, html) => {
+        if (err) {
+            return res.status(400).json(err);
+        }
+        res.redirect('/#/questions?access_token=' + accessToken );
+    });
+  }
+);
 //// END AUTH REQUESTS ////
 
 //// START USERS ////
@@ -127,15 +135,9 @@ app.get('/logout', function(req, res) {
 //// END USERS ////
 
 //// START QUESTIONS ////
-//passport.authenticate('bearer', { session: false }),
 app.get('/questions', (req, res) => {
     // grab question from user's questions array...
-    // const question = req.user.questions[0];
-    // const response = {
-    //     _id: question.questionId,
-    //     question: question.word,
-    //     score: req.user.score
-    // }
+    console.log("in questions");
     Question.find((err, q) => {
         if (err) {
             return res.status(400).json(err);
@@ -173,7 +175,7 @@ app.put('/questions', passport.authenticate('bearer', { session: false }), (req,
 //// END QUESTIONS ////
 
 function runServer() {
-    let databaseUri = process.env.DATABASE_URI || global.databaseUri || 'mongodb://localhost/spanish-x';
+    let databaseUri = process.env.DATABASE_URI || global.databaseUri || 'mongodb://localhost/firefly';
     mongoose.Promise = global.Promise;
     mongoose.connect(databaseUri).then(function() {
      app.listen(PORT, HOST, (err) => {
