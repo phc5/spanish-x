@@ -20,9 +20,8 @@ dotenv.load();
 console.log(`Server running in ${process.env.NODE_ENV} mode`);
 
 const app = express();
-const jsonParser = bodyParser.json();
-
-app.use(express.static(process.env.CLIENT_PATH))
+app.use(bodyParser.json());
+app.use(express.static(process.env.CLIENT_PATH));
 app.use(passport.initialize());
 
 passport.serializeUser(function(user, done) {
@@ -135,12 +134,11 @@ app.get('/logout', function(req, res) {
 //// END USERS ////
 
 //// START QUESTIONS ////
-const questionResponse = (questionId, word, score, outcome) => {
+const questionResponse = (questionId, word, score) => {
     return {
         questionId,
         word,
-        score,
-        outcome
+        score
     };
 };
 
@@ -148,35 +146,28 @@ app.get('/questions', passport.authenticate('bearer', { session: false }), (req,
     // grab one word from user's questions array...
     // send word, question id (to get translation later, score, correct/incorrect
     const word = req.user.questions[0];
-    
-    res.status(200).json({});
+    res.status(200).json(questionResponse(word.questionId, word.word, req.user.score));
 });
 
-app.post('/questions', jsonParser, (req, res) => {
-    if (!req.body.word) {
+app.post('/questions', passport.authenticate('bearer', { session: false }), (req, res) => {
+    if (!req.body.answer) {
         return res.status(422).json({
-          message: 'Missing field: Word',
-      });
+            message: 'Missing field: answer'
+        });
     }
+    const user = req.user;
+    let currentQuestion = user.questions[0];
+    const userAnswer = req.body.answer.toLowerCase().trim();
 
-    if (!req.body.translation) {
-        return res.status(422).json({
-          answer: 'Missing field: Translation',
-      });
-    }
-
-    Question.create({
-        word: req.body.word,
-        answer: req.body.translation
-    }, (err, question) => {
-        if (err) {
-            return res.status(400).json(err);
-        }
-    });
-});
-
-app.put('/questions', passport.authenticate('bearer', { session: false }), (req, res) => {
-
+    //TODO: 
+    // --if correct answer then update algIndex * 2, else algIndex = 1
+    // also update scores accordingly...
+    // --after checking validitiy, remove the question (which is the first question in array)
+    // insert the question into the array at specified index and 
+    // set new question to 0th index
+    // --update user database so that question order is updated...
+    // --send back the first question in the array to the client so that it will
+    // update the questions component...
 });
 //// END QUESTIONS ////
 

@@ -5,8 +5,11 @@ function Home() {
 	return (
 		<div>
 			<section className="header">
-				<div>
-					<h1>Spanish X</h1>
+				<div className="welcome">
+					<h3>welcome to</h3>
+					<div className="typewriter">
+						<h1>Spanish X</h1>
+					</div>
 				</div>
 			</section>
 			<section className="log-in">

@@ -1,19 +1,57 @@
 body {
-	background-image: url('https://files.slack.com/files-pri/T02D02A55-F3EDLRB0C/spanish_x_backgrnd.png');
+	background-image: url('../assets/background.png');
 	background-repeat: no-repeat;
 	background-size: cover;
 }
 
 .log-in a {
 	position: absolute;
-	right: 8px;
-	top: 8px;
+	right: 10px;
+	top: 5px;
 }
 
 h1 {
-	color: red;
+	text-align: center;
+	font-size: 100px;
+	font-family: 'Life Savers', cursive;
+}
+
+h3 {
+	font-size: 50px;
+	text-align: center;
+	font-family: 'Life Savers', cursive;
 }
 
 p {
 	color: blue;
 }
+
+.welcome {
+	margin-top: 15%;
+}
+
+.typewriter h1 {
+	text-decoration: underline;
+  	overflow: hidden;
+  	border-right: .15em solid orange;
+  	white-space: nowrap;
+  	margin: 0 auto;
+  	letter-spacing: .30em;
+  	animation: 
+   	 	typing 5.5s steps(40, end),
+    	blink-caret .75s step-end infinite;
+}
+
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: transparent; }
+}
+
+
+
