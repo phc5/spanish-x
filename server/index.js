@@ -135,15 +135,21 @@ app.get('/logout', function(req, res) {
 //// END USERS ////
 
 //// START QUESTIONS ////
+const questionResponse = (questionId, word, score, outcome) => {
+    return {
+        questionId,
+        word,
+        score,
+        outcome
+    };
+};
+
 app.get('/questions', passport.authenticate('bearer', { session: false }), (req, res) => {
-    // grab question from user's questions array...
-    console.log("in questions");
-    Question.find((err, q) => {
-        if (err) {
-            return res.status(400).json(err);
-        }
-        return res.status(200).json(q);
-    });
+    // grab one word from user's questions array...
+    // send word, question id (to get translation later, score, correct/incorrect
+    const word = req.user.questions[0];
+    
+    res.status(200).json({});
 });
 
 app.post('/questions', jsonParser, (req, res) => {
