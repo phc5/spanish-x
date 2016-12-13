@@ -8,11 +8,7 @@ const gameReducer = (state, action) => {
 	state = Object.assign({}, copyState);
 	
 	if (action.type === actions.FETCH_QUESTIONS_SUCCESS) {
-		let questions = [];
-		for (var i = 0; i < action.questions.length; i++) {
-			questions.push(action.questions[i]);
-		}
-		state.questions = state.questions.concat(questions);
+		state.questions = state.questions.concat(action.questions);
 	}
 
 	return state;
