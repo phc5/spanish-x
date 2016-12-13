@@ -20,9 +20,7 @@ dotenv.load();
 console.log(`Server running in ${process.env.NODE_ENV} mode`);
 
 const app = express();
-const jsonParser = bodyParser.json();
-
-console.log(process.env.CLIENT_PATH);
+app.use(bodyParser.json());
 app.use(express.static(process.env.CLIENT_PATH));
 app.use(passport.initialize());
 
@@ -152,31 +150,29 @@ app.get('/questions', passport.authenticate('bearer', { session: false }), (req,
     res.status(200).json(questionResponse(word.questionId, word.word, req.user.score, false));
 });
 
-app.post('/questions', jsonParser, (req, res) => {
-    if (!req.body.word) {
-        return res.status(422).json({
-          message: 'Missing field: Word',
-      });
-    }
+app.post('/questions', passport.authenticate('bearer', { session: false }), (req, res) => {
+    // if (!req.body.word) {
+    //     return res.status(422).json({
+    //       message: 'Missing field: Word',
+    //   });
+    // }
 
-    if (!req.body.translation) {
-        return res.status(422).json({
-          answer: 'Missing field: Translation',
-      });
-    }
+    // if (!req.body.translation) {
+    //     return res.status(422).json({
+    //       answer: 'Missing field: Translation',
+    //   });
+    // }
 
-    Question.create({
-        word: req.body.word,
-        answer: req.body.translation
-    }, (err, question) => {
-        if (err) {
-            return res.status(400).json(err);
-        }
-    });
-});
-
-app.put('/questions', passport.authenticate('bearer', { session: false }), (req, res) => {
-
+    // Question.create({
+    //     word: req.body.word,
+    //     answer: req.body.translation
+    // }, (err, question) => {
+    //     if (err) {
+    //         return res.status(400).json(err);
+    //     }
+    // });
+    console.log(req.body);
+    res.status(200).json({});
 });
 //// END QUESTIONS ////
 
