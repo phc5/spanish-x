@@ -181,7 +181,7 @@ app.put('/questions', passport.authenticate('bearer', { session: false }), (req,
 //// END QUESTIONS ////
 
 function runServer() {
-    let databaseUri = process.env.DATABASE_URI || global.databaseUri || 'mongodb://localhost/firefly';
+    let databaseUri = process.env.DATABASE_URI || global.databaseUri || 'mongodb://localhost/spanish-x';
     mongoose.Promise = global.Promise;
     mongoose.connect(databaseUri).then(function() {
      app.listen(PORT, HOST, (err) => {
