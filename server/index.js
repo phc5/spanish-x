@@ -22,7 +22,8 @@ console.log(`Server running in ${process.env.NODE_ENV} mode`);
 const app = express();
 const jsonParser = bodyParser.json();
 
-app.use(express.static(process.env.CLIENT_PATH))
+console.log(process.env.CLIENT_PATH);
+app.use(express.static(process.env.CLIENT_PATH));
 app.use(passport.initialize());
 
 passport.serializeUser(function(user, done) {
@@ -148,8 +149,7 @@ app.get('/questions', passport.authenticate('bearer', { session: false }), (req,
     // grab one word from user's questions array...
     // send word, question id (to get translation later, score, correct/incorrect
     const word = req.user.questions[0];
-    
-    res.status(200).json({});
+    res.status(200).json(questionResponse(word.questionId, word.word, req.user.score, false));
 });
 
 app.post('/questions', jsonParser, (req, res) => {

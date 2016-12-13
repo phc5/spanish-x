@@ -12,6 +12,7 @@ class Questions extends React.Component {
     }
 
     render() {
+        console.log(this.props.questions);
         if (!this.props.questions) {
             var spans = <span></span>
         } else {
@@ -29,6 +30,10 @@ class Questions extends React.Component {
                 </section>
                 <section>
                     <div>{word}</div>
+                    <form>
+                        <input type="text"></input>
+                        <button type="submit">Submit</button>
+                    </form>
                 </section>
             </div>
         )
