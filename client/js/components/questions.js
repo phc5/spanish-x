@@ -20,6 +20,7 @@ class Questions extends React.Component {
     }
 
     render() {
+        console.log(this.props.questions);
         if (!this.props.questions) {
             var spans = <span></span>
         } else {

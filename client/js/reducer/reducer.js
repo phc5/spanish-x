@@ -10,8 +10,11 @@ const gameReducer = (state, action) => {
 	
 	if (action.type === actions.FETCH_QUESTIONS_SUCCESS) {
 		state.questions = state.questions.concat(action.questions);
-	} else if (action.type === actions.ANSWER_SUCCESS) {
-		state.answer = action.answer;
+		console.log(state.questions);
+	} else if (action.type === actions.SUBMIT_SUCCESS) {
+		state.questions.shift();
+		state.questions = state.questions.concat(action.answer);
+		console.log(state.questions);
 	}
 
 	return state;

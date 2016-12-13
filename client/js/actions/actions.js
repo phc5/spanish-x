@@ -74,6 +74,7 @@ const submitAnswer = (answer) => {
 			}
 			return response.json();
 		}).then((answer) => {
+			console.log(answer);
 			return dispatch(submitSuccess(answer));
 		}).catch((err) => {
 			console.log(err);
