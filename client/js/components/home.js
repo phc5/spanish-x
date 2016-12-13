@@ -11,7 +11,7 @@ function Home() {
 			</section>
 			<section className="log-in">
 				<a href="/auth/google">
-					<span>Sign in with Google</span>
+					<img src="/assets/btn_google_signin_light_pressed_web.png" />
 				</a>
 			</section>
 		</div>
