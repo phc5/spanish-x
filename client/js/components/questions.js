@@ -10,16 +10,7 @@ class Questions extends React.Component {
     componentDidMount() {
         this.props.dispatch(actions.fetchQuestion());
     }
-
-    // submitAnswer(event) {
-    //     event.preventDefault();
-    //     this.props.dispatch(actions.submitAnswer({
-    //         _id: this.props.questions._id,
-    //         answer: this.refs.userAnswer.value
-    //     }));
-    //     this.refs.userAnswer.value = '';
-    // }
-
+    
     render() {
         if (!this.props.questions.question) {
             var spans = <span></span>
