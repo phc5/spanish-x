@@ -19,7 +19,6 @@ class Questions extends React.Component {
         }));
         event.target.reset();
     }
-
     render() {
         if (this.props.questions.length === 0) {
             var spans = <span></span>
