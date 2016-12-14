@@ -3,6 +3,7 @@ import React from 'react';
 
 function Home() {
 	return (
+
 		<div>
 			<section className="header">
 				<div className="welcome">

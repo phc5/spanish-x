@@ -1,8 +1,9 @@
 body {
-	background-image: url('../assets/background.png');
+	background-image: url('../assets/background2.png');
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+
 
 .log-in a {
 	position: absolute;
@@ -28,6 +29,37 @@ p {
 
 .question-page {
 	text-align: center;
+}
+
+input {
+	font-size: 24px;
+	border-radius: 8px;
+	margin-top: 12%;
+}
+
+.spx {
+	text-align: left;
+	font-size: 28px;
+	color: black;
+	font-weight: bold;
+	font-family: 'Life Savers', cursive;
+	border: 2px solid black;
+	border-radius: 8px;
+	width: 130px;
+	padding: 8px;
+}
+
+.logout {
+	position: absolute;
+	top: 20px;
+	right: 15px;
+	border: 2px solid black;
+	padding: 8px;
+	border-radius: 8px;
+}
+
+.logoutImg {
+	width: 100px;
 }
 
 .welcome {

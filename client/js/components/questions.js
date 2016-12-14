@@ -37,26 +37,26 @@ class Questions extends React.Component {
             var outcome = <span>INCORRECT!</span>
         }
         return (
-            <div className="question-page">
-                <section className="button">
-                    <p>Spanish X</p>
-                    <a className="logout" href="/logout">
-                        <span>Log Out</span>
-                    </a>
-                </section>
-                <section>
-                    <div>{word}</div>
-                    <form onSubmit={this.submit}>
-                        <input name="answer" type="text" autoComplete="off"></input>
-                    </form>
-                </section>
-                <section>
-                    <div>{outcome}</div>
-                </section>
-                <section>
-                    <div>{score}</div>
-                </section>
-            </div>
+                <div className="question-page">
+                    <section className="button">
+                        <p className="spx">Spanish X</p>
+                        <a className="logout" href="/logout">
+                            <img src="/assets/logout.png" className="logoutImg"/>
+                        </a>
+                    </section>
+                    <section>
+                        <div>{word}</div>
+                        <form onSubmit={this.submit}>
+                            <input name="answer" type="text" autoComplete="off"></input>
+                        </form>
+                    </section>
+                    <section>
+                        <div>{outcome}</div>
+                    </section>
+                    <section>
+                        <div>{score}</div>
+                    </section>
+                </div>
         )
     }
 }
