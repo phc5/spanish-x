@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 import express from 'express';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import passport from 'passport';
@@ -23,6 +24,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.static(process.env.CLIENT_PATH));
 app.use(passport.initialize());
+app.use(cookieParser());
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -68,7 +70,7 @@ passport.use(new GoogleStrategy({
                 return callback(err, user[0]);
             }
         })
-}
+    }
 ));
 //// END GOOGLE AUTH STRAT ////
 
@@ -90,8 +92,7 @@ passport.use(new BearerStrategy(
 app.get('/auth/google', passport.authenticate('google', {scope:['profile']}));
     
 app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/', session: false }),
-  (req, res) => {
+  passport.authenticate('google', { failureRedirect: '/', session: false }), (req, res) => {
     fs.readFile('./client/index.html', (err, html) => {
         if (err) {
             return res.status(400).json(err);
@@ -128,7 +129,6 @@ app.delete('/:userId', (req, res) => {
 });
 
 app.get('/logout', function(req, res) {
-    req.logout();
     res.redirect('/');
 });
 //// END USERS ////
@@ -183,7 +183,7 @@ app.post('/questions', passport.authenticate('bearer', { session: false }), (req
         }
         return res.status(200).json(questionResponse(currentQuestion.questionId, currentQuestion.word, userModified.score, outcome));
     })
-    // TODO: 
+    // TODO: DONE 12-14-2016
     // --if correct answer then update algIndex * 2, else algIndex = 1
     // also update scores accordingly...
     // --after checking validity, remove the question (which is the first question in array)

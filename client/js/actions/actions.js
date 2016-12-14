@@ -83,7 +83,6 @@ const submitAnswer = (answer) => {
 	}
 }
 
-
 exports.FETCH_QUESTIONS_SUCCESS = FETCH_QUESTIONS_SUCCESS;
 exports.fetchQuestionsSuccess = fetchQuestionsSuccess;
 exports.FETCH_QUESTIONS_ERROR = FETCH_QUESTIONS_ERROR;
