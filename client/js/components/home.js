@@ -1,10 +1,12 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 
 function Home() {
 	return (
-
 		<div>
+			<Link to="/about">About Spanish-X</Link>|
+			<Link to="/learn">Learn more stuff here</Link>
 			<section className="header">
 				<div className="welcome">
 					<h3>welcome to</h3>

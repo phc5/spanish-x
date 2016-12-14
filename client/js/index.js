@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import store from './store';
-import {Router, Route, hashHistory} from 'react-router';
+import {Router, Route, hashHistory, Link} from 'react-router';
 import Home from './components/home';
 import Questions from './components/questions';
+import Study from './components/study';
+import AboutUs from './components/about-me';
 
 
 
@@ -15,6 +17,8 @@ const routes = (
 		<Router history={hashHistory}>
 			<Route path="/" component={Home} />
 			<Route path="/questions" component={Questions} />
+			<Route path="/learn" component={Study} />
+			<Route path="/about" component={AboutUs} />
 		</Router>
 	</Provider>
 )

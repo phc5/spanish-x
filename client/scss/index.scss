@@ -39,14 +39,29 @@ p {
 .spanishWord {
 	font-size: 75px;
 	font-family: Arial;
-	margin-top: 12%;
+	margin-top: 8%;
 }
 
 .outcome {
 	margin-top: 2%;
 	font-family: Arial;
-	font-size: 24px;
+	font-size: 30px;
+    -webkit-animation: fadeOut 2s;
+    animation: fadeOut 2s;
+    -webkit-animation-delay: 5s;
+    animation-delay: 5s;
 }
+
+@-webkit-keyframes fadeOut {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+@keyframes fadeOut {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
 
 input {
 	text-align: center;

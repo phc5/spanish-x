@@ -47,12 +47,12 @@ class Questions extends React.Component {
                     </section>
                     <section>
                         <div className="spanishWord">{word}</div>
+                        <div className="outcome">{outcome}</div>
                         <form onSubmit={this.submit}>
                             <input name="answer" pattern="^[a-zA-Z]+$" type="text" autoComplete="off"></input>
                         </form>
                     </section>
                     <section>
-                        <div>{outcome}</div>
                         <div className="score">Score: {score}</div>
                     </section>
                     <section>
