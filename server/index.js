@@ -107,7 +107,7 @@ app.get('/auth/google/callback',
 //// END AUTH REQUESTS ////
 
 //// START USERS ////
-app.get('/users', (req, res) => {
+app.get('/users', passport.authenticate('bearer', { session: false }), (req, res) => {
     User.find((err, users) => {
         if (err) {
             return res.status(400).json(err);
@@ -116,7 +116,7 @@ app.get('/users', (req, res) => {
     });
 });
 
-app.delete('/:userId', (req, res) => {
+app.delete('/:userId', passport.authenticate('bearer', { session: false }), (req, res) => {
     const userId = req.params.userId;
     User.findByIdAndRemove(userId, (err, user) => {
         if (err) {
