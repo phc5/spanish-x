@@ -24,7 +24,7 @@ class Questions extends React.Component {
             var spans = <span></span>
         } else {
             var word = this.props.questions.map((question, index) =>
-                <span key={index}>{question.word} &nbsp;</span>
+                <div key={index}>{question.word}</div>
             );
             var score = this.props.questions[0].score
         }
@@ -44,7 +44,7 @@ class Questions extends React.Component {
                         </a>
                     </section>
                     <section>
-                        <div className="spanishWord">word</div>
+                        <div className="spanishWord">{word}</div>
                        
                         <form onSubmit={this.submit}>
                             <input name="answer" type="text" autoComplete="off"></input>
@@ -52,7 +52,7 @@ class Questions extends React.Component {
                     </section>
                     
                     <section>
-                        <div className="score">score</div>
+                        <div className="score">{score}</div>
                     </section>
                     <section>
                         {outcome}
