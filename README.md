@@ -124,5 +124,6 @@ Requires the [Travis CLI client](https://github.com/travis-ci/travis.rb).
 * Push your code to GitHub: `git push origin master`
 
 ##Special Thanks to:
-* 
+* https://cdn.drawception.com/images/panels/2016/9-10/OO5Rs4sEP2-2.png
+** For their wonderful background image
 

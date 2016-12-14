@@ -83,7 +83,7 @@ passport.use(new BearerStrategy(
             return done(null, user);
         });
     }
-    ));
+));
 //// END BEARER STRAT ////
 
 //// START AUTH REQUESTS ////
