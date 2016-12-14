@@ -29,11 +29,11 @@ class Questions extends React.Component {
             var score = this.props.questions[0].score
         }
         if (this.props.outcome) {
-            var outcome = <span>CORRECT!</span>
+            var outcome = <div className="correct"><iframe className="iframeCorrect" src="https://m.popkey.co/136a10/X03AG.gif" frameborder="0" scrolling="no" allowFullScreen></iframe></div>
         } else if (this.props.outcome == null) {
             var outcome = <span></span>
         } else {
-            var outcome = <span>INCORRECT!</span>
+            var outcome = <div className="incorrect"><iframe src="//giphy.com/embed/T6KhOswycnLLq" allowFullScreen></iframe></div>
         }
         return (
                 <div className="question-page">
@@ -45,7 +45,7 @@ class Questions extends React.Component {
                     </section>
                     <section>
                         <div className="spanishWord">word</div>
-                        <div className="outcome">outcome</div>
+                       
                         <form onSubmit={this.submit}>
                             <input name="answer" type="text" autoComplete="off"></input>
                         </form>
@@ -54,10 +54,12 @@ class Questions extends React.Component {
                     <section>
                         <div className="score">score</div>
                     </section>
-    
-                        <div className="correct"><iframe className="iframeCorrect" src="https://m.popkey.co/136a10/X03AG.gif" frameborder="0" scrolling="no" allowFullScreen></iframe></div>
+                    <section>
+                        {outcome}
+                    </section>
+                    
                    
-                        <div className="incorrect"><iframe src="//giphy.com/embed/T6KhOswycnLLq" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="http://giphy.com/gifs/chuck-norris-T6KhOswycnLLq">via GIPHY</a></p></div>
+                    
                    
                 </div>
         )
