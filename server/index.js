@@ -157,15 +157,14 @@ app.post('/questions', passport.authenticate('bearer', { session: false }), (req
 
     if (userAnswer === currentQuestion.translation) {
         currentQuestion.algIndex *= 2;
-        user.score += 5;
+        user.score += 10;
         outcome = true;
     } else {
         currentQuestion.algIndex = 1;
         user.score -= 5;
     }
 
-    user.questions.shift();
-    user.questions.splice(currentQuestion.algIndex, 0, currentQuestion);
+    user.questions.splice(currentQuestion.algIndex, 0, user.questions.shift());
     currentQuestion = user.questions[0];
 
     User.findByIdAndUpdate(user._id, {
