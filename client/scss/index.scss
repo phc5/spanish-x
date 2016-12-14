@@ -62,7 +62,9 @@ input {
 }
 
 .correct {
-	float: left;
+	text-align: left;
+	margin-top: -15%;
+	margin-left: 7%;
 }
 
 iframe {
@@ -73,7 +75,9 @@ iframe {
 }
 
 .incorrect {
-	float: right;
+	text-align: right;
+	margin-top: -15%;
+	margin-right: 7%;
 }
 
 .spx {
