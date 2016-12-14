@@ -44,17 +44,21 @@ class Questions extends React.Component {
                         </a>
                     </section>
                     <section>
-                        <div>{word}</div>
+                        <div className="spanishWord">word</div>
+                        <div className="outcome">outcome</div>
                         <form onSubmit={this.submit}>
                             <input name="answer" type="text" autoComplete="off"></input>
                         </form>
                     </section>
+                    
                     <section>
-                        <div>{outcome}</div>
+                        <div className="score">score</div>
                     </section>
-                    <section>
-                        <div>{score}</div>
-                    </section>
+    
+                        <div className="correct"><iframe className="iframeCorrect" src="https://m.popkey.co/136a10/X03AG.gif" frameborder="0" scrolling="no" allowFullScreen></iframe></div>
+                   
+                        <div className="incorrect"><iframe src="//giphy.com/embed/T6KhOswycnLLq" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="http://giphy.com/gifs/chuck-norris-T6KhOswycnLLq">via GIPHY</a></p></div>
+                   
                 </div>
         )
     }
