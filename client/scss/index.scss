@@ -2,6 +2,7 @@ body {
 	background-image: url('../assets/background2.png');
 	background-repeat: no-repeat;
 	background-size: cover;
+	background-attachment: fixed;
 }
 
 
@@ -31,10 +32,42 @@ p {
 	text-align: center;
 }
 
+.spanishWord {
+	font-size: 75px;
+	font-family: Arial;
+}
+
+.outcome {
+	margin-top: 2%;
+	font-family: Arial;
+	font-size: 24px;
+}
+
 input {
 	font-size: 24px;
 	border-radius: 8px;
-	margin-top: 12%;
+	margin-top: 2%;
+}
+
+.score {
+	margin-top: 3%;
+	font-family: Arial;
+	font-size: 24px;
+}
+
+.correct {
+	float: left;
+}
+
+iframe {
+	margin-top: 0%;
+	width: 350px;
+	height: 250px;
+	border-radius: 12px;
+}
+
+.incorrect {
+	float: right;
 }
 
 .spx {
@@ -51,10 +84,10 @@ input {
 
 .logout {
 	position: absolute;
-	top: 20px;
-	right: 15px;
+	top: 26px;
+	right: 11px;
 	border: 2px solid black;
-	padding: 8px;
+	padding: 6px;
 	border-radius: 8px;
 }
 
