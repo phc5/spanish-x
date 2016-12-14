@@ -16,20 +16,28 @@ class Questions extends React.Component {
         event.preventDefault();
         this.props.dispatch(actions.submitAnswer({
             answer: event.target.answer.value
-        }))
+        }));
+        event.target.reset();
     }
 
     render() {
-        console.log(this.props.questions);
-        if (!this.props.questions) {
+        if (this.props.questions.length === 0) {
             var spans = <span></span>
         } else {
             var word = this.props.questions.map((question, index) =>
                 <span key={index}>{question.word} &nbsp;</span>
             );
+            var score = this.props.questions[0].score
+        }
+        if (this.props.outcome) {
+            var outcome = <span>CORRECT!</span>
+        } else if (this.props.outcome == null) {
+            var outcome = <span></span>
+        } else {
+            var outcome = <span>INCORRECT!</span>
         }
         return (
-            <div>
+            <div className="question-page">
                 <section className="button">
                     <p>Spanish X</p>
                     <a className="logout" href="/logout">
@@ -39,8 +47,14 @@ class Questions extends React.Component {
                 <section>
                     <div>{word}</div>
                     <form onSubmit={this.submit}>
-                        <input name="answer" type="text"></input>
+                        <input name="answer" type="text" autoComplete="off"></input>
                     </form>
+                </section>
+                <section>
+                    <div>{outcome}</div>
+                </section>
+                <section>
+                    <div>{score}</div>
                 </section>
             </div>
         )
@@ -50,7 +64,8 @@ class Questions extends React.Component {
 const mapStateToProps = function (state, props) {
     return {
         questions: state.questions,
-        answer: state.answer
+        answer: state.answer,
+        outcome: state.outcome
     };
 };
 

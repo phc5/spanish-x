@@ -2,7 +2,8 @@ import actions from '../actions/actions';
 
 const initialState = {
 	questions: [],
-	answer: null
+	answer: null,
+	outcome: null
 }
 const gameReducer = (state, action) => {
 	let copyState = state || initialState;
@@ -10,11 +11,14 @@ const gameReducer = (state, action) => {
 	
 	if (action.type === actions.FETCH_QUESTIONS_SUCCESS) {
 		state.questions = state.questions.concat(action.questions);
-		console.log(state.questions);
 	} else if (action.type === actions.SUBMIT_SUCCESS) {
 		state.questions.shift();
 		state.questions = state.questions.concat(action.answer);
-		console.log(state.questions);
+		if (action.answer.outcome) {
+			state.outcome = true
+		} else {
+			state.outcome = false
+		}
 	}
 
 	return state;

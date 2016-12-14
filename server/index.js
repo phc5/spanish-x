@@ -134,11 +134,12 @@ app.get('/logout', function(req, res) {
 //// END USERS ////
 
 //// START QUESTIONS ////
-const questionResponse = (questionId, word, score) => {
+const questionResponse = (questionId, word, score, outcome) => {
     return {
         questionId,
         word,
-        score
+        score,
+        outcome
     };
 };
 
@@ -146,7 +147,7 @@ app.get('/questions', passport.authenticate('bearer', { session: false }), (req,
     // grab one word from user's questions array...
     // send word, question id (to get translation later, score, correct/incorrect
     const word = req.user.questions[0];
-    res.status(200).json(questionResponse(word.questionId, word.word, req.user.score));
+    res.status(200).json(questionResponse(word.questionId, word.word, req.user.score, false));
 });
 
 app.post('/questions', passport.authenticate('bearer', { session: false }), (req, res) => {
@@ -158,11 +159,34 @@ app.post('/questions', passport.authenticate('bearer', { session: false }), (req
     const user = req.user;
     let currentQuestion = user.questions[0];
     const userAnswer = req.body.answer.toLowerCase().trim();
+    let outcome = false;
 
-    //TODO: 
+    if (userAnswer === currentQuestion.translation) {
+        currentQuestion.algIndex *= 2;
+        user.score += 5;
+        outcome = true;
+    } else {
+        currentQuestion.algIndex = 1;
+        user.score -= 5;
+    }
+
+    user.questions.shift();
+    user.questions.splice(currentQuestion.algIndex, 0, currentQuestion);
+    currentQuestion = user.questions[0];
+
+    User.findByIdAndUpdate(user._id, {
+        questions: user.questions,
+        score: user.score
+    }, {new: true}, (err, userModified) => {
+        if (err) {
+            return res.status(400).json(err);
+        }
+        return res.status(200).json(questionResponse(currentQuestion.questionId, currentQuestion.word, userModified.score, outcome));
+    })
+    // TODO: 
     // --if correct answer then update algIndex * 2, else algIndex = 1
     // also update scores accordingly...
-    // --after checking validitiy, remove the question (which is the first question in array)
+    // --after checking validity, remove the question (which is the first question in array)
     // insert the question into the array at specified index and 
     // set new question to 0th index
     // --update user database so that question order is updated...
