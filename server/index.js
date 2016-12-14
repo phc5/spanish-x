@@ -1,7 +1,6 @@
 import 'babel-polyfill';
 import express from 'express';
 import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import passport from 'passport';
@@ -24,7 +23,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.static(process.env.CLIENT_PATH));
 app.use(passport.initialize());
-app.use(cookieParser());
 
 passport.serializeUser(function(user, done) {
   done(null, user);
