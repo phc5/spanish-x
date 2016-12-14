@@ -24,6 +24,10 @@ h3 {
 	font-family: 'Life Savers', cursive;
 }
 
+.back-home {
+	text-decoration: none;
+}
+
 p {
 	color: blue;
 }
@@ -35,6 +39,7 @@ p {
 .spanishWord {
 	font-size: 75px;
 	font-family: Arial;
+	margin-top: 12%;
 }
 
 .outcome {
@@ -82,6 +87,10 @@ iframe {
 	padding: 8px;
 }
 
+.spx:hover {
+	background-color: #e9e0df;
+}
+
 .logout {
 	position: absolute;
 	top: 26px;
@@ -89,6 +98,10 @@ iframe {
 	border: 2px solid black;
 	padding: 6px;
 	border-radius: 8px;
+}
+
+.logout:hover {
+	background-color: #e9e0df;
 }
 
 .logoutImg {

@@ -38,7 +38,7 @@ class Questions extends React.Component {
         return (
                 <div className="question-page">
                     <section className="button">
-                        <p className="spx">Spanish X</p>
+                        <a className="back-home" href="/"><p className="spx">Spanish X</p></a>
                         <a className="logout" href="/logout">
                             <img src="/assets/logout.png" className="logoutImg"/>
                         </a>
