@@ -24,16 +24,18 @@ class Questions extends React.Component {
             var spans = <span></span>
         } else {
             var word = this.props.questions.map((question, index) =>
-                <span key={index}>{question.word} &nbsp;</span>
+                <div key={index}>{question.word}</div>
             );
             var score = this.props.questions[0].score
         }
         if (this.props.outcome) {
-            var outcome = <div className="correct"><iframe className="iframeCorrect" src="https://m.popkey.co/136a10/X03AG.gif" frameborder="0" scrolling="no" allowFullScreen></iframe></div>
+            var outcomeImg = <div className="correct"><iframe className="iframeCorrect" src="https://m.popkey.co/136a10/X03AG.gif" frameBorder="0" scrolling="no" allowFullScreen></iframe></div>
+            var outcome = <div>Correct</div>
         } else if (this.props.outcome == null) {
             var outcome = <span></span>
         } else {
-            var outcome = <div className="incorrect"><iframe src="//giphy.com/embed/T6KhOswycnLLq" allowFullScreen></iframe></div>
+            var outcomeImg = <div className="incorrect"><iframe src="//giphy.com/embed/T6KhOswycnLLq" allowFullScreen></iframe></div>
+            var outcome = <div>Incorrect</div>
         }
         return (
                 <div className="question-page">
@@ -45,17 +47,16 @@ class Questions extends React.Component {
                     </section>
                     <section>
                         <div className="spanishWord">{word}</div>
-                       
                         <form onSubmit={this.submit}>
-                            <input name="answer" type="text" autoComplete="off"></input>
+                            <input name="answer" pattern="^[a-zA-Z]+$" type="text" autoComplete="off"></input>
                         </form>
                     </section>
-                    
                     <section>
-                        <div className="score">{score}</div>
+                        <div>{outcome}</div>
+                        <div className="score">Score: {score}</div>
                     </section>
                     <section>
-                        {outcome}
+                        {outcomeImg}
                     </section>
                     
                    
