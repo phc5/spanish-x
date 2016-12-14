@@ -6,7 +6,7 @@ import {Router, Route, hashHistory, Link} from 'react-router';
 import Home from './components/home';
 import Questions from './components/questions';
 import Study from './components/study';
-import AboutUs from './components/about-me';
+import AboutUs from './components/about-us';
 
 
 

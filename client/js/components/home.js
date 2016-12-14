@@ -4,9 +4,12 @@ import {Link} from 'react-router';
 
 function Home() {
 	return (
-		<div>
-			<Link to="/about">About Spanish-X</Link>|
-			<Link to="/learn">Learn more stuff here</Link>
+		<div className="links">
+			<div className="about">
+				<Link to="/about" style={{ textDecoration: 'none' }}>About Spanish-X</Link> <br />
+				<Link to="/learn" style={{ textDecoration: 'none' }}>Learn more stuff here</Link>
+			</div>
+			
 			<section className="header">
 				<div className="welcome">
 					<h3>welcome to</h3>
