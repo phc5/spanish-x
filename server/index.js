@@ -135,12 +135,8 @@ app.get('/logout', function(req, res) {
 
 //// START QUESTIONS ////
 const questionResponse = (questionId, word, score, outcome) => {
-    return {
-        questionId,
-        word,
-        score,
-        outcome
-    };
+    //need this to send a question back to the client.
+    return { questionId, word, score, outcome };
 };
 
 app.get('/questions', passport.authenticate('bearer', { session: false }), (req, res) => {
