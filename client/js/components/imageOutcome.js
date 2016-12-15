@@ -17,6 +17,7 @@ class ImageOutcome extends Component {
 		}
 		return (
 			<div>
+				<div className="outcome">{outcome}</div>
 				{imageOutcome}
 			</div>
 		)

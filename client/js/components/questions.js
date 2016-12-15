@@ -4,6 +4,7 @@ import actions from '../actions/actions';
 import Nav from './nav';
 import Reset from './reset';
 import ImageOutcome from './imageOutcome';
+import Score from './score';
 
 class Questions extends React.Component {
     constructor(props) {
@@ -24,27 +25,23 @@ class Questions extends React.Component {
     }
 
     render() {
-        if (this.props.questions.length === 0) {
-            var spans = <span></span>
-        } else {
-            var word = this.props.questions.map((question, index) =>
-                <div key={index}>{question.word}</div>
-            );
+         if (this.props.questions.length === 0) {
+             var spans = <span></span>
+         } else {
+             var word = this.props.questions.map((question, index) =>
+                 <div key={index}>{question.word}</div>
+             );
             var score = this.props.questions[0].score
         }
         return (
                 <div className="question-page">
                     <Nav />
-                    <section>
-                        <div className="spanishWord">{word}</div>
-                        
-                        <form onSubmit={this.submit}>
-                             <input name="answer" pattern="^[a-zA-Z ]+$" type="text" autoComplete="off"></input>
-                        </form>
-                    </section>
-                    <section>
-                        <div className="score">Score: {score}</div>
-                    </section>
+                        <div className="spanishWord">{word}
+                            <form onSubmit={this.submit}>
+                                <input name="answer" pattern="^[a-zA-Z ]+$" type="text" autoComplete="off"></input>
+                            </form>
+                        </div>
+                        <Score score={score}/>
                     <ImageOutcome />
                     <Reset />
                 </div>
