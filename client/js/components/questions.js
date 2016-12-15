@@ -56,7 +56,7 @@ class Questions extends React.Component {
                         <div className="spanishWord">{word}</div>
                         <div className="outcome">{outcome}</div>
                         <form onSubmit={this.submit}>
-                            <input name="answer" pattern="/^[a-zA-Z\s]*$/" type="text" autoComplete="off"></input>
+                            <input name="answer" pattern="^[a-zA-Z ]+$" type="text" autoComplete="off"></input>
                         </form>
                     </section>
                     <section>
