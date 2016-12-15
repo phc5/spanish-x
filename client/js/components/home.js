@@ -7,6 +7,7 @@ function Home() {
 		<div className="links">
 			<div className="about">
 				<Link to="/about" style={{ textDecoration: 'none' }}>About Spanish-X</Link> <br />
+				<Link to="/leaderboard" style= {{ textDecoration: 'none' }}>Leaderboard</Link> <br />
 			</div>
 			
 			<section className="header">

@@ -48,9 +48,25 @@ const resetError = (err) => {
 	}
 }
 
+const SCORES_SUCCESS = 'SCORES_SUCCESS';
+const getScoresSuccess = (users) => {
+	return {
+		type: SCORES_SUCCESS,
+		users: users
+	};
+};
+
+const SCORES_ERROR = 'SCORES_ERROR';
+const getScoresError = (err) => {
+	return {
+		type: SCORES_ERROR,
+		error: err
+	}
+}
+
 const fetchQuestion = () => {
 	return (dispatch) => {	
-		let url = 'https://spanishx.herokuapp.com/questions';
+		let url = 'http://localhost:8080/questions';
 		return fetch(url, {
 			headers: {
 				Authorization: `Bearer ${TOKEN}`
@@ -73,7 +89,7 @@ const fetchQuestion = () => {
 
 const submitAnswer = (answer) => {
 	return (dispatch) => {
-		let url = 'https://spanishx.herokuapp.com/questions';
+		let url = 'http://localhost:8080/questions';
 		return fetch(url, {
 			body: JSON.stringify(answer),
 			method: 'POST',
@@ -100,7 +116,7 @@ const submitAnswer = (answer) => {
 
 const reset = () => {
 	return (dispatch) => {
-		let url = 'https://spanishx.herokuapp.com/users';
+		let url = 'http://localhost:8080/users';
 		return fetch(url, {
 			method: 'PUT',
 			headers: {
@@ -115,6 +131,24 @@ const reset = () => {
 			return response.json();
 		}).then((questions) => {
 			return dispatch(resetSuccess(questions));
+		}).catch((err) => {
+			return dispatch(resetError(err));
+		})
+	}
+}
+
+const getScores = () => {
+	return (dispatch) => {
+		let url = 'http://localhost:8080/users';
+		return fetch(url, {}).then((response) => {
+			if (response.status < 200) {
+				let error = new Error(response.statusText);
+				error.response = response;
+				throw error;
+			}
+			return response.json();
+		}).then ((users) => {
+			return dispatch(getScoresSuccess(users));
 		}).catch((err) => {
 			return dispatch(resetError(err));
 		})
@@ -140,3 +174,9 @@ exports.resetSuccess = resetSuccess;
 exports.RESET_ERROR = RESET_ERROR;
 exports.resetError = resetError;
 exports.reset = reset;
+
+exports.SCORES_SUCCESS = SCORES_SUCCESS;
+exports.getScoresSuccess = getScoresSuccess;
+exports.SCORES_ERROR = SCORES_ERROR;
+exports.getScoresError = getScoresError;
+exports.getScores = getScores;
