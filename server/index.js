@@ -137,7 +137,7 @@ app.put('/users', passport.authenticate('bearer', { session: false }), (req, res
                 algIndex: 1
             });
         });
-         (req.user._id, {questions: questionsArray, score: 0}, (err, user) => {
+        User.findByIdAndUpdate(req.user._id, {questions: questionsArray, score: 0}, (err, user) => {
             if (err) {
                 return res.status(400).json(err);
             }
