@@ -32,6 +32,22 @@ const submitError = (err) => {
 	}
 }
 
+const RESET_SUCCESS = 'RESET_SUCCESS';
+const resetSuccess = (questions) => {
+	return {
+		type: RESET_SUCCESS,
+		questions: questions
+	};
+};
+
+const RESET_ERROR = 'RESET_ERROR';
+const resetError = (err) => {
+	return {
+		type: RESET_ERROR,
+		error: err
+	}
+}
+
 const fetchQuestion = () => {
 	return (dispatch) => {	
 		let url = 'http://localhost:8080/questions';
@@ -82,6 +98,29 @@ const submitAnswer = (answer) => {
 	}
 }
 
+const reset = () => {
+	return (dispatch) => {
+		let url = 'http://localhost:8080/users';
+		return fetch(url, {
+			method: 'PUT',
+			headers: {
+				Authorization: `Bearer ${TOKEN}`
+			}
+		}).then((response) => {
+			if (response.status < 200) {
+				let error = new Error(response.statusText);
+				error.response = response;
+				throw error;
+			}
+			return response.json();
+		}).then((questions) => {
+			return dispatch(resetSuccess(questions));
+		}).catch((err) => {
+			return dispatch(resetError(err));
+		})
+	}
+}
+
 exports.FETCH_QUESTIONS_SUCCESS = FETCH_QUESTIONS_SUCCESS;
 exports.fetchQuestionsSuccess = fetchQuestionsSuccess;
 exports.FETCH_QUESTIONS_ERROR = FETCH_QUESTIONS_ERROR;
@@ -95,3 +134,9 @@ exports.SUBMIT_ERROR = SUBMIT_ERROR;
 exports.submitError = submitError;
 
 exports.submitAnswer = submitAnswer;
+
+exports.RESET_SUCCESS = RESET_SUCCESS;
+exports.resetSuccess = resetSuccess;
+exports.RESET_ERROR = RESET_ERROR;
+exports.resetError = resetError;
+exports.reset = reset;

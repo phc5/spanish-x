@@ -126,6 +126,29 @@ app.delete('/:userId', passport.authenticate('bearer', { session: false }), (req
     });
 });
 
+app.put('/users', passport.authenticate('bearer', { session: false }), (req, res) => {
+    const questionsArray = [];
+    Question.find((err, questions) => {
+        questions.forEach((question) => {
+            questionsArray.push({
+                questionId: question._id,
+                word: question.word,
+                translation: question.translation,
+                algIndex: 1
+            });
+        });
+        User.findByIdAndUpdate(req.user._id, {questions: questionsArray, score: 0}, (err, user) => {
+            if (err) {
+                return res.status(400).json(err);
+            }
+            user.questions = questionsArray;
+            user.score = 0;
+            const word = user.questions[0];
+            res.status(200).json(questionResponse(word.questionId, word.word, user.score, false));
+        });
+    });
+});
+
 app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
@@ -177,20 +200,11 @@ app.post('/questions', passport.authenticate('bearer', { session: false }), (req
         }
         return res.status(200).json(questionResponse(currentQuestion.questionId, currentQuestion.word, userModified.score, outcome));
     })
-    // TODO: DONE 12-14-2016
-    // --if correct answer then update algIndex * 2, else algIndex = 1
-    // also update scores accordingly...
-    // --after checking validity, remove the question (which is the first question in array)
-    // insert the question into the array at specified index and 
-    // set new question to 0th index
-    // --update user database so that question order is updated...
-    // --send back the first question in the array to the client so that it will
-    // update the questions component...
 });
 //// END QUESTIONS ////
 
 function runServer() {
-    let databaseUri = process.env.DATABASE_URI || global.databaseUri || 'mongodb://localhost/spanish-x';
+    let databaseUri = process.env.DATABASE_URI || global.databaseUri || 'mongodb://' + process.env.MLAB_USER + ':' + process.env.MLAB_PASS + '@ds133418.mlab.com:33418/spanish-x';
     mongoose.Promise = global.Promise;
     mongoose.connect(databaseUri).then(function() {
      app.listen(PORT, HOST, (err) => {
