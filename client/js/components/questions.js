@@ -6,6 +6,7 @@ class Questions extends React.Component {
     constructor(props) {
         super(props);
         this.submit = this.submit.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
     componentDidMount() {
@@ -19,6 +20,12 @@ class Questions extends React.Component {
         }));
         event.target.reset();
     }
+
+    reset(event) {
+        event.preventDefault();
+        this.props.dispatch(actions.reset());
+    }
+
     render() {
         if (this.props.questions.length === 0) {
             var spans = <span></span>
@@ -58,10 +65,9 @@ class Questions extends React.Component {
                     <section>
                         {outcomeImg}
                     </section>
-                    
-                   
-                    
-                   
+                    <section>
+                        <button onClick={this.reset}>RESET</button>
+                    </section>
                 </div>
         )
     }

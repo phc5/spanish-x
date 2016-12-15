@@ -19,6 +19,10 @@ const gameReducer = (state, action) => {
 		} else {
 			state.outcome = false
 		}
+	} else if (action.type === actions.RESET_SUCCESS) {
+		state.questions = [];
+		state.questions = state.questions.concat(action.questions);
+		state.outcome = null;
 	}
 
 	return state;
