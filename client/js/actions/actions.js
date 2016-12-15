@@ -50,7 +50,7 @@ const resetError = (err) => {
 
 const fetchQuestion = () => {
 	return (dispatch) => {	
-		let url = 'https://spanishx.herokuapp.com/questions';
+		let url = 'http://localhost:8080/questions';
 		return fetch(url, {
 			headers: {
 				Authorization: `Bearer ${TOKEN}`
@@ -73,7 +73,7 @@ const fetchQuestion = () => {
 
 const submitAnswer = (answer) => {
 	return (dispatch) => {
-		let url = 'https://spanishx.herokuapp.com/questions';
+		let url = 'http://localhost:8080/questions';
 		return fetch(url, {
 			body: JSON.stringify(answer),
 			method: 'POST',
@@ -100,7 +100,7 @@ const submitAnswer = (answer) => {
 
 const reset = () => {
 	return (dispatch) => {
-		let url = 'https://spanishx.herokuapp.com/users';
+		let url = 'http://localhost:8080/users';
 		return fetch(url, {
 			method: 'PUT',
 			headers: {
