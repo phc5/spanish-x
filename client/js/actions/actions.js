@@ -66,7 +66,7 @@ const getScoresError = (err) => {
 
 const fetchQuestion = () => {
 	return (dispatch) => {	
-		let url = 'http://localhost:8080/questions';
+		let url = 'https://spanishx.herokuapp.com/questions';
 		return fetch(url, {
 			headers: {
 				Authorization: `Bearer ${TOKEN}`
@@ -89,7 +89,7 @@ const fetchQuestion = () => {
 
 const submitAnswer = (answer) => {
 	return (dispatch) => {
-		let url = 'http://localhost:8080/questions';
+		let url = 'https://spanishx.herokuapp.com/questions';
 		return fetch(url, {
 			body: JSON.stringify(answer),
 			method: 'POST',
@@ -116,7 +116,7 @@ const submitAnswer = (answer) => {
 
 const reset = () => {
 	return (dispatch) => {
-		let url = 'http://localhost:8080/users';
+		let url = 'https://spanishx.herokuapp.com/users';
 		return fetch(url, {
 			method: 'PUT',
 			headers: {
@@ -139,7 +139,7 @@ const reset = () => {
 
 const getScores = () => {
 	return (dispatch) => {
-		let url = 'http://localhost:8080/users';
+		let url = 'https://spanishx.herokuapp.com/users';
 		return fetch(url, {}).then((response) => {
 			if (response.status < 200) {
 				let error = new Error(response.statusText);
