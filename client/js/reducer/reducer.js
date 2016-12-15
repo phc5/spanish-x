@@ -3,7 +3,8 @@ import actions from '../actions/actions';
 const initialState = {
 	questions: [],
 	answer: null,
-	outcome: null
+	outcome: null,
+	users: []
 }
 const gameReducer = (state, action) => {
 	let copyState = state || initialState;
@@ -23,6 +24,8 @@ const gameReducer = (state, action) => {
 		state.questions = [];
 		state.questions = state.questions.concat(action.questions);
 		state.outcome = null;
+	} else if (action.type === actions.SCORES_SUCCESS) {
+		state.users = state.users.concat(action.users);
 	}
 
 	return state;

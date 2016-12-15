@@ -6,6 +6,7 @@ import {Router, Route, hashHistory, Link} from 'react-router';
 import Home from './components/home';
 import Questions from './components/questions';
 import AboutUs from './components/about-us';
+import Leaderboard from './components/leaderboard';
 
 
 
@@ -17,6 +18,7 @@ const routes = (
 			<Route path="/" component={Home} />
 			<Route path="/questions" component={Questions} />
 			<Route path="/about" component={AboutUs} />
+			<Route path="/leaderboard" component={Leaderboard} />
 		</Router>
 	</Provider>
 )

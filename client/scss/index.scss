@@ -176,6 +176,10 @@ iframe {
     	blink-caret .75s step-end infinite;
 }
 
+.leaderboard li {
+	list-style: none;
+}
+
 
 @keyframes typing {
   from { width: 0 }

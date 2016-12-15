@@ -35,13 +35,14 @@ class Questions extends React.Component {
         }
         return (
                 <div className="question-page">
+
                     <Nav />
                         <div className="spanishWord">{word}
                             <form onSubmit={this.submit}>
                                 <input name="answer" pattern="^[a-zA-Z ]+$" type="text" autoComplete="off"></input>
                             </form>
                         </div>
-                        <Score score={score}/>
+                    <Score score={score}/>
                     <ImageOutcome />
                     <Reset />
                 </div>

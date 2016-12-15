@@ -48,6 +48,22 @@ const resetError = (err) => {
 	}
 }
 
+const SCORES_SUCCESS = 'SCORES_SUCCESS';
+const getScoresSuccess = (users) => {
+	return {
+		type: SCORES_SUCCESS,
+		users: users
+	};
+};
+
+const SCORES_ERROR = 'SCORES_ERROR';
+const getScoresError = (err) => {
+	return {
+		type: SCORES_ERROR,
+		error: err
+	}
+}
+
 const fetchQuestion = () => {
 	return (dispatch) => {	
 		let url = 'http://localhost:8080/questions';
@@ -121,6 +137,27 @@ const reset = () => {
 	}
 }
 
+const getScores = () => {
+	return (dispatch) => {
+		let url = 'https://spanishx.herokuapp.com/users';
+		return fetch(url, {
+			mode: 'no-cors'
+		}).then((response) => {
+			if (response.status < 200) {
+				let error = new Error(response.statusText);
+				error.response = response;
+				throw error;
+			}
+			return response.json();
+		}).then ((users) => {
+			console.log("in here");
+			return dispatch(getScoresSuccess(users));
+		}).catch((err) => {
+			return dispatch(resetError(err));
+		})
+	}
+}
+
 exports.FETCH_QUESTIONS_SUCCESS = FETCH_QUESTIONS_SUCCESS;
 exports.fetchQuestionsSuccess = fetchQuestionsSuccess;
 exports.FETCH_QUESTIONS_ERROR = FETCH_QUESTIONS_ERROR;
@@ -140,3 +177,9 @@ exports.resetSuccess = resetSuccess;
 exports.RESET_ERROR = RESET_ERROR;
 exports.resetError = resetError;
 exports.reset = reset;
+
+exports.SCORES_SUCCESS = SCORES_SUCCESS;
+exports.getScoresSuccess = getScoresSuccess;
+exports.SCORES_ERROR = SCORES_ERROR;
+exports.getScoresError = getScoresError;
+exports.getScores = getScores;
