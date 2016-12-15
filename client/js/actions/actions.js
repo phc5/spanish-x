@@ -150,6 +150,7 @@ const getScores = () => {
 			}
 			return response.json();
 		}).then ((users) => {
+			console.log("in here");
 			return dispatch(getScoresSuccess(users));
 		}).catch((err) => {
 			return dispatch(resetError(err));
