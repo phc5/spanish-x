@@ -36,7 +36,7 @@ passport.deserializeUser(function(user, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: 'http://localhost:8080/auth/google/callback'
+    callbackURL: 'https://spanishx.herokuapp.com/auth/google/callback'
 },
 (accessToken, refreshToken, profile, callback) => {
     User.find({ googleId: profile.id }, (err, user) => {
@@ -107,7 +107,7 @@ app.get('/auth/google/callback',
 //// END AUTH REQUESTS ////
 
 //// START USERS ////
-app.get('/users', passport.authenticate('bearer', { session: false }), (req, res) => {
+app.get('/users', (req, res) => {
     User.find((err, users) => {
         if (err) {
             return res.status(400).json(err);
