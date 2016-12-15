@@ -55,6 +55,8 @@ class Questions extends React.Component {
  						<li key={i}>{leaders[i][0]} ---- {leaders[i][1]}</li>
  					)
  			}
+
+ 			//TODO: use built-in sort 
  		}
         return (
                 <div className="question-page">
