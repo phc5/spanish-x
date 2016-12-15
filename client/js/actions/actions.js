@@ -140,7 +140,9 @@ const reset = () => {
 const getScores = () => {
 	return (dispatch) => {
 		let url = 'https://spanishx.herokuapp.com/users';
-		return fetch(url, {}).then((response) => {
+		return fetch(url, {
+			mode: 'no-cors'
+		}).then((response) => {
 			if (response.status < 200) {
 				let error = new Error(response.statusText);
 				error.response = response;
