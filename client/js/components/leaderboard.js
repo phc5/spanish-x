@@ -30,7 +30,7 @@ class Questions extends React.Component {
         return (
                 <div className="question-page">
                     <section className="button">
-                        <a className="back-home" href="/"><p className="spx">Spanish X</p></a>
+                        <a className="back-home" href="/"><p className="home">Spanish X</p></a>
                         <h3>Leaderboard</h3>
                         <ul className="leaderboard">
                         	{leaderBoard}
