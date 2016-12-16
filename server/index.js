@@ -180,11 +180,11 @@ app.post('/questions', passport.authenticate('bearer', { session: false }), (req
     let outcome = false;
 
     if (userAnswer === currentQuestion.translation) {
-        currentQuestion.algIndex *= 2;
+        currentQuestion.algIndex *= 5;
         user.score += 10;
         outcome = true;
     } else {
-        currentQuestion.algIndex = 1;
+        currentQuestion.algIndex = 2;
         user.score -= 5;
     }
 
