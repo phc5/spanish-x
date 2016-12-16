@@ -2,126 +2,59 @@
 
 With over 50 million Spanish-speaking natives in the United States, it is easy to say that Spanish has been one of the most popular language spoken today.  This is the main reason why, learning Spanish can improve your employment potential.  Just knowing a second language would increase your chances, but to know Spanish could set you apart from those that know a different second language.  In addition, travelling around the world could also be that much sweeter, knowing Spanish.
 
-In order to learn Spanish or any other language, we would need to have a good/efficient way of learning so we can actually retain what we are studying.  That's where Spaced repetition comes in handy.  With spaced repetition, if we know something, we don't need to practice it for some period of time, but if we don't know, then we need to practice it.  For example, if you know the material, it will be sent to the end of the list, but if you don't, it will be put in somewhere in the list, where it comes back sooner.  
+In order to learn Spanish or any other language, we would need to have a good/efficient way of learning so we can actually retain what we are studying.  That's where Spaced repetition comes in handy.  With spaced repetition, if we know something, we don't need to practice it for some period of time, but if we don't know, then we need to practice it.  For example, if you know the material, it will be sent to the end of the list, but if you don't, it will be put in somewhere in the list, where it comes back sooner.
 
-## Getting started
+## What is spaced repetition?
+Spaced repetition is a method for efficient learning that has you practice concepts or skills over increasing periods of time. It's based on the notion of a "forgetting curve," or the idea that over time, if we don't actively use or reflect on something we know, our knowledge decays. With spaced repetition, we stay ahead of that moment of forgetting, but we do it in a smart way: if we know something, we don't need to practice it for some period of time. If we don't know something, we do need to practice it.
 
-### Setting up a project
+For example, let's say that you wanted to learn four new words, A, B, C and D.  Using spaced repetition you might test the words in this order:
 
-* Move into your projects directory: `cd ~/YOUR_PROJECTS_DIRECTORY`
-* Clone this repository: `git clone https://github.com/oampo/thinkful-full-stack-template YOUR_PROJECT_NAME`
-* Move into the project directory: `cd YOUR_PROJECT_NAME`
-* Install the dependencies: `npm install`
-* Create a new repo on GitHub: https://github.com/new
-    * Make sure the "Initialize this repository with a README" option is left **un**checked
-* Update the remote to point to your GitHub repository: `git remote set-url origin https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME`
-* Make sure everyone in your group is working out of separate branches on github and push to their branch.  This becomes important when merging to the master.
-###Tech Stack
-* HTMLSCSS
-* React/Redux
-* MongoDB
-* Express
-* Node.js
-* Passport
-* Google OAuth
+ABABCACBDCADB...
 
+Notice how the spacing between the questions gets longer as you go on.  So subsequent tests on question A are separated by one question (B), then two questions (BC), then four questions (CBDC).  And the same thing happens with question B and question C.  If you got one of the questions wrong then you would reduce the spacing for that question to make sure that the correct answer is.
 
-### Working on the project
-* Divide the tasks amongst the group and the individual should focus on that
+## Frontend
+The frontend for the app was built using React and Redux, and allow users to login, answer the questions, and see how many questions they have successfully answered. To answer a question the user will be shown a word in Spanish on the left-hand side of the screen, and asked to type the corresponding word in English on the right-hand side. When the user submits their answer, they will be given feedback and will be taken to the next question.
 
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Run the MongoDB: ./mongod or sudo ./mongod
-* Run the development task: `npm run dev`
-    * Starts a server running at http://localhost:8080
-    * Automatically rebuilds when any of your files change
+The frontend submits information stating whether the question was answered correctly or not to the backend so that the spaced repetition algorithm can take that into account. This will also allow the user's score (how many questions they have answered correctly) to be updated.
 
-## Directory layout
+To authenticate, we used Google's implementation of OAuth. This will allow anyone with a Google account to simply and easily register or login to your app. On the frontend this makes your requirements very simple: you simply need a login button which links to the appropriate backend endpoint, and a combination of Google and your backend will take care of the rest.
 
-```
-.
-├── client      Client-side code
-│   ├── assets  Images, videos, etc.
-│   ├── js      JavaScript
-│   └── scss    SASS stylesheets
-├── server      Server-side code
-└── test        Tests
-    ├── client  Client tests
-    └── server  Server tests
-```
+### Requirements
+* Technologies: React, Redux
+* Two pages: Landing page and spaced repetition page
+* Landing page:
+    - Advertise the app
+    - Register/login with Google button
+* Spaced repetition page:
+    - Displays current word
+    - Text input for answer
+    - Notifies the user whether they were correct or incorrect
+    - Submits correct/incorrect to backend
+    - Displays a score based on user's progress
 
-##API Documentation
-###Need to authenticate, using Google's implementation of OAuth
-**/auth/google**
+## Backend
 
-**GET/auth/google**
-* This makes authorization requests.  It allows anyone with a Google account to easily register or login to your app.
+The backend of the app plays three key roles.  The first is authentication.  To allow users to authenticate, the backend should use the [Google OAuth 2.0 strategy](https://github.com/jaredhanson/passport-google-oauth2) for Passport.  To protect the endpoints you should use the [Bearer strategy](https://github.com/jaredhanson/passport-http-bearer).
 
-##User Endpoint
-**GET/user**
+The second role is to integrate the spaced repetition algorithm.
 
-Endpoint to user of the app/google account
+The third role is to store the users' progress in a MongoDB database (mLab).  This should include both the number of questions which they have answered correctly, plus any information about their answer history that your spaced repetition algorithm needs in order to generate a new sequence of words to test the user.
 
+### Requirements
 
-**DELETE/userid**
+* Technologies: Node.js, Express, MongoDB, Passport, OAuth
+* Allow users to register/login using Google OAuth
+* Use the spaced repetition algorithm to generate the next word pair
+* Pairs of words should be stored in a Mongo database
+    - This should be a fixed array of questions for an MVP
+* Store the number of questions which users have answered correctly in the database
+* Store whatever information is needed for the algorithm about the user's answer history in the database
 
-Deletes the user by their userid
+## Mockups
 
-**GET/logout**
-
-Logs out the user and redirects to the home
-
-###Start of the Questions
-**GET/questions**
-
-Using the Bearer strategy to protect the endpoint of the questions
-
-**POST/questions**
-
-Actually lets you create the questions that you are storing in the server
-
-**PUT/questions**
-
-
-
-
-
-
-## Deployment
-
-Requires the [Heroku CLI client](https://devcenter.heroku.com/articles/heroku-command-line).
-
-### Setting up the project on Heroku
-
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Create the Heroku app: `heroku create PROJECT_NAME`
-* Instruct Heroku to install the development dependencies: `heroku config:set NPM_CONFIG_PRODUCTION=false`
-
-### Deploying to Heroku
-
-* Push your code to Heroku: `git push heroku master`
-
-## Continuous Integration
-
-* Add your repository to [Travis CI](https://travis-ci.org/)
-
-## Continuous Deployment
-
-Requires the [Travis CLI client](https://github.com/travis-ci/travis.rb).
-
-### Setting up CD
-
-* Add the following configuration to `.travis.yml`:
-
-    ```
-    deploy:
-      provider: heroku
-      app: YOUR_HEROKU_APP_NAME
-    ```
-* Add your Heroku API key: `travis encrypt $(heroku auth:token) --add deploy.api_key`
-
-### Deploying using CD
-
-* Push your code to GitHub: `git push origin master`
+- [Landing page](https://wireframe.cc/PAFKuo) - This allows the user to login or register to use the app.
+- [Spaced repetition page](https://wireframe.cc/7jKL60) - This allows the user to answer questions by typing answers in the text input.
 
 ##Special Thanks to:
 * https://cdn.drawception.com/images/panels/2016/9-10/OO5Rs4sEP2-2.png
