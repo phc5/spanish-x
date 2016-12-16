@@ -1,4 +1,4 @@
-# Let's learn Spanish
+# Spanish X : Let's Learn Spanish
 
 With over 50 million Spanish-speaking natives in the United States, it is easy to say that Spanish has been one of the most popular language spoken today.  This is the main reason why, learning Spanish can improve your employment potential.  Just knowing a second language would increase your chances, but to know Spanish could set you apart from those that know a different second language.  In addition, travelling around the world could also be that much sweeter, knowing Spanish.
 
