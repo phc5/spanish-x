@@ -56,7 +56,29 @@ The third role is to store the users' progress in a MongoDB database (mLab).  Th
 - [Landing page](https://wireframe.cc/PAFKuo) - This allows the user to login or register to use the app.
 - [Spaced repetition page](https://wireframe.cc/7jKL60) - This allows the user to answer questions by typing answers in the text input.
 
+### Clone to your workspace
+
+* Move into your projects directory: `cd ~/YOUR_PROJECTS_DIRECTORY`
+* Clone this repository: `git clone https://github.com/oshirodk/spanish-x.git`
+* Move into the project directory: `cd YOUR_PROJECT_NAME`
+* Install the dependencies: `npm install`
+* Create a new repo on GitHub: https://github.com/new
+    * Make sure the "Initialize this repository with a README" option is left **un**checked
+* Update the remote to point to your GitHub repository: `git remote set-url origin https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME`
+
+### Getting started
+
+* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
+* Run the development task: `npm run dev`
+    * Starts a server running at http://localhost:8080
+    * Automatically rebuilds when any of your files change
+
 ##Special Thanks to:
 * https://cdn.drawception.com/images/panels/2016/9-10/OO5Rs4sEP2-2.png
 ** For their wonderful background image
+
+[MIT][license] © [oshirodk][website]
+
+
+
 
