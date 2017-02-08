@@ -7,12 +7,12 @@ class ImageOutcome extends Component {
 	}
 	render() {
 		if (this.props.outcome) {
-			var imageOutcome = <div className="correct"><iframe className="iframeCorrect" src="https://m.popkey.co/136a10/X03AG.gif" frameBorder="0" scrolling="no" allowFullScreen></iframe></div>
+			var imageOutcome = <div className="correct" key="correct"><img className="iframeCorrect" src="https://m.popkey.co/136a10/X03AG.gif"/></div>
 			var outcome = <div>Correct</div>
 		} else if (this.props.outcome == null) {
 			var outcome = <span></span>
 		} else {
-			var imageOutcome = <div className="incorrect"><iframe src="//giphy.com/embed/T6KhOswycnLLq" allowFullScreen></iframe></div>
+			var imageOutcome = <div className="incorrect" key="incorrect"><img src="https://media.giphy.com/media/T6KhOswycnLLq/giphy.gif"/></div>
 			var outcome = <div>Incorrect</div>
 		}
 		return (
